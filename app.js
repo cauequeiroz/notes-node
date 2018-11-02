@@ -14,19 +14,18 @@ if (command === 'list') {
   const note = notes.add(argv.title, argv.body);
 
   if (note) {
-    console.log(`
-      Note added!
-      ---
-      [Title] ${note.title}
-      [Description] ${note.body}
-    `);
+    console.log('Note was added!');
+    console.log(`Title: ${note.title}`);
+    console.log(`Content: ${note.body}`);
   } else {
     console.log('You cannot add duplicated notes.');
   }
 } else if (command === 'read') {
   notes.get(argv.title);
 } else if (command === 'remove') {
-  notes.remove(argv.title);
+  const removedNote = notes.remove(argv.title);
+  const message = removedNote ? 'Note was removed!' : 'Note not found.';
+  console.log(message);
 } else {
   console.log('[ERROR] Command not recognized.');
 }
