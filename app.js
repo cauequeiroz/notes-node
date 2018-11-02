@@ -15,13 +15,19 @@ if (command === 'list') {
 
   if (note) {
     console.log('Note was added!');
-    console.log(`Title: ${note.title}`);
-    console.log(`Content: ${note.body}`);
+    notes.logNote(note);
   } else {
     console.log('You cannot add duplicated notes.');
   }
 } else if (command === 'read') {
-  notes.get(argv.title);
+  const note = notes.get(argv.title);
+
+  if (note) {
+    console.log('Note was found!');
+    notes.logNote(note);
+  } else {
+    console.log('Note not found.');
+  }
 } else if (command === 'remove') {
   const removedNote = notes.remove(argv.title);
   const message = removedNote ? 'Note was removed!' : 'Note not found.';
