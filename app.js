@@ -1,12 +1,37 @@
 const fs = require('fs');
 const os = require('os');
 const _ = require('lodash');
-const argv = require('yargs').argv;
-
 const notes = require('./notes.js');
 
+const settings = {
+  title: {
+    describe: 'Title of note',
+    demand: true,
+    alias: 't'
+  },
+  body: {
+    describe: 'Content of note',
+    demand: true,
+    alias: 'b'
+  }
+}
+
+const argv = require('yargs')
+  .command('add', 'Add a new note', {
+    title: settings.title,
+    body: settings.body
+  })
+  .command('remove', 'Remove a note', {
+    title: settings.title
+  })
+  .command('read', 'Read a note', {
+    title: settings.title
+  })
+  .command('list', 'List all notes')
+  .help()
+  .argv;
+
 const command = argv._[0];
-console.log('Command:', command);
 
 if (command === 'list') {
   notes.getAll();
