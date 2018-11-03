@@ -34,7 +34,10 @@ const argv = require('yargs')
 const command = argv._[0];
 
 if (command === 'list') {
-  notes.getAll();
+  const notesList = notes.getAll();
+
+  console.log(`Listing ${notesList.length} note(s):`);
+  notesList.forEach(note => notes.logNote(note));
 } else if (command === 'add') {
   const note = notes.add(argv.title, argv.body);
 

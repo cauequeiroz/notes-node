@@ -20,7 +20,7 @@ const get = title => {
 }
 
 const getAll = () => {
-  console.log('Listing all notes...');
+  return fetchNotes();
 }
 
 const add = (title, body) => {
